@@ -12,12 +12,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dio:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  dio:
 
 
 flutter:
