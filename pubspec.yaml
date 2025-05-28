@@ -1,0 +1,23 @@
+name: dio_pretty_logger
+description: "Pretty logger for DIO package"
+version: 1.0.1
+homepage: https://github.com/deepak07082/dio_pretty_logger.git
+repository: https://github.com/deepak07082/dio_pretty_logger.git
+issue_tracker: https://github.com/deepak07082/dio_pretty_logger/issues
+
+environment:
+  sdk: ^3.8.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  dio:
+
+
+flutter:
