@@ -37,9 +37,9 @@ class DioPrettyLogger {
   static bool kDioLogenable = !kReleaseMode;
   static int maxListPrintLength = 2;
 
-  static void onRequest(RequestOptions options) {
+  static void onRequest(RequestOptions options, {String? reqMethod}) {
     var endpoint = options.uri.toString();
-    var method = options.method.toUpperCase();
+    var method = reqMethod ?? options.method.toUpperCase();
     var reqdata = options.queryParameters;
     if (!kDioLogenable) {
       return;
