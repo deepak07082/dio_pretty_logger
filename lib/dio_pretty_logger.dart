@@ -4,7 +4,21 @@ import 'package:flutter/foundation.dart';
 
 InterceptorsWrapper prettyInterceptorsWrapper = InterceptorsWrapper(
   onRequest: (options, handler) {
-    DioPrettyLogger.onRequest(options);
+    var baseOption = BaseOptions(
+      baseUrl: options.baseUrl,
+      contentType: options.contentType,
+      headers: options.headers,
+      method: options.method,
+      queryParameters: options.queryParameters,
+      responseType: options.responseType,
+      followRedirects: options.followRedirects,
+      connectTimeout: options.connectTimeout,
+      receiveTimeout: options.receiveTimeout,
+      extra: options.extra,
+      sendTimeout: options.sendTimeout,
+      maxRedirects: options.maxRedirects,
+    );
+    DioPrettyLogger.onRequest(baseOption, options.path);
     handler.next(options);
   },
   onError: (e, handler) {
@@ -37,15 +51,19 @@ class DioPrettyLogger {
   static bool kDioLogenable = !kReleaseMode;
   static int maxListPrintLength = 2;
 
-  static void onRequest(RequestOptions options, {String? reqMethod}) {
-    var endpoint = options.uri.toString();
+  static void onRequest(
+    BaseOptions options,
+    String endPoint, {
+    String? reqMethod,
+    Map<String, dynamic>? data,
+  }) {
     var method = reqMethod ?? options.method.toUpperCase();
-    var reqdata = options.queryParameters;
+    var reqdata = data ?? options.queryParameters;
     if (!kDioLogenable) {
       return;
     }
     if (showRequest) {
-      _printRequestHeader(options, endpoint, method);
+      _printRequestHeader(options.baseUrl, endPoint, method);
     }
     if (showRequestHeader) {
       _printMapAsTable(options.queryParameters, header: 'Query Parameters');
@@ -161,28 +179,16 @@ class DioPrettyLogger {
   }
 
   static void _printRequestHeader(
-    RequestOptions options,
+    String baseUrl,
     String endpoint,
     String method,
   ) {
-    final uri = options.baseUrl + endpoint;
+    final uri = baseUrl + endpoint;
     _printBoxed(header: 'Request ║ $method ', text: uri);
   }
 
   static void _printLine([String pre = '', String suf = '╝']) =>
       logPrint('$pre${'═' * maxWidth}$suf');
-
-  // static void _printKV(String? key, Object? v) {
-  //   final pre = '╟ ${_indent(1)}"$key": ';
-  //   final msg = v.toString();
-
-  //   if (pre.length + msg.length > maxWidth) {
-  //     logPrint(pre);
-  //     _printBlock(msg);
-  //   } else {
-  //     logPrint('$pre$msg');
-  //   }
-  // }
 
   static void _printBlock(String msg) {
     final lines = (msg.length / maxWidth).ceil();
