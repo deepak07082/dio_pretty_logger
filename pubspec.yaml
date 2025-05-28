@@ -1,6 +1,6 @@
 name: dio_pretty_logger
 description: "Pretty logger for DIO package"
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/deepak07082/dio_pretty_logger.git
 repository: https://github.com/deepak07082/dio_pretty_logger.git
 issue_tracker: https://github.com/deepak07082/dio_pretty_logger/issues
