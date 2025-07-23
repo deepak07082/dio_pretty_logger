@@ -153,7 +153,7 @@ class DioPrettyLogger {
   static void _printResponse(data) {
     if (data != null) {
       if (data is Map) {
-        printPrettyMap(data);
+        printPrettyMapData(data);
       } else if (data is Uint8List) {
         logPrint('║${_indent()}[');
         _printUint8List(data);
@@ -207,6 +207,26 @@ class DioPrettyLogger {
 
   static void printPrettyMap(
     Map data, {
+    String customTitle = '',
+    int initialTab = kInitialTab,
+    bool isListItem = false,
+    bool isLast = false,
+  }) {
+    logPrint('');
+    logPrint('╔╣ $customTitle');
+    logPrint('║');
+    printPrettyMapData(
+      data,
+      initialTab: initialTab,
+      isListItem: isListItem,
+      isLast: isLast,
+    );
+    _printLine('╚');
+    logPrint('');
+  }
+
+  static void printPrettyMapData(
+    Map data, {
     int initialTab = kInitialTab,
     bool isListItem = false,
     bool isLast = false,
@@ -229,7 +249,7 @@ class DioPrettyLogger {
           logPrint('║${_indent(tabs)} "$key": $value${!isLast ? ',' : ''}');
         } else {
           logPrint('║${_indent(tabs)} "$key": {');
-          printPrettyMap(value, initialTab: tabs);
+          printPrettyMapData(value, initialTab: tabs);
         }
       } else if (value is List) {
         if (compact && _canFlattenList(value)) {
@@ -273,7 +293,7 @@ class DioPrettyLogger {
         if (compact && _canFlattenMap(e)) {
           logPrint('║${_indent(tabs)}  $e${!isLast ? ',' : ''}');
         } else {
-          printPrettyMap(
+          printPrettyMapData(
             e,
             initialTab: tabs + 1,
             isListItem: true,
