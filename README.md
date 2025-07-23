@@ -1,7 +1,7 @@
 # 📱 dio_pretty_logger
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://pub.dev/packages/dio_pretty_logger)
-[![pub](https://img.shields.io/pub/v/fast_cache_network_image)](https://pub.dev/packages/dio_pretty_logger)
+[![pub](https://img.shields.io/pub/v/dio_pretty_logger)](https://pub.dev/packages/dio_pretty_logger)
 [![dart](https://img.shields.io/badge/dart-pure%20dart-success)](https://pub.dev/packages/dio_pretty_logger)
 
 A developer-friendly Dio interceptor that logs HTTP requests, responses, and errors in a clean and readable format. Useful for debugging API calls in Flutter/Dart projects.

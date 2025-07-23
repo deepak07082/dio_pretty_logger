@@ -9,3 +9,7 @@
 ## 1.0.3
 
 * onRequest parameter added
+
+## 1.0.4
+
+* prettyMap design alter
